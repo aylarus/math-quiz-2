@@ -1,5 +1,5 @@
 from tkinter import *
-from PIL import ImageTK, image
+from PIL import ImageTk, Image
 
 
 names = []
@@ -7,12 +7,10 @@ names = []
 class Quiz:
     def __init__(self, parent):#constructor, The __init__() function is called automatically every time the class is being used to create a new object.
  
-        background_color="white"# to set it as background color for all the label widgets
-
-        self.bg_images= Images .open("mpic.jpg")#need to use image if need to resize
+        self.bg_images= Image.open("mpic.jpg")#need to use image if need to resize
         self.bg_image = self.bg_images.resize((450, 350), Image.ANTIALIAS)
         self.bg_image = ImageTk.PhotoImage(self.bg_image)
-        #self.bg_image = PhotoImage(file="mpic.jpg")
+        #self.bg_image = PhotoImage(file="mpic.jpg") 
 
         #frame set up
         self.quiz_frame=Frame(parent, bg = "white", padx=100, pady=100)
@@ -20,7 +18,7 @@ class Quiz:
         self.quiz_frame.grid()#This geometry manager organizes widgets in a table-like structure in the parent widget.
                
         #widgets goes below
-        self.heading_label=Label(self.quiz_frame, text="Welcome to the Maths Quiz program ",  font=("Comic Sans MS","11"), bg="lightcyan")
+        self.heading_label=Label(self.quiz_frame, text="Welcome to the Maths Quiz Program ",  font=("Comic Sans MS","11"), bg="lightcyan")
         self.heading_label.grid(row=0, padx=20) 
         self.var1=IntVar() #holds value of radio buttons
 
@@ -35,12 +33,10 @@ class Quiz:
         self.entry_box=Entry(self.quiz_frame)
         self.entry_box.grid(row=2,padx=20, pady=20)
 
-        
         #continue button
-        self.continue_button = Button(self.quiz_frame, text="Continue", font=("Helvetica", "13", "bold"), bg="blue", command=self.name_collection)
+        self.continue_button = Button(self.quiz_frame, text="Continue", font=("Helvetica", "13","bold"), bg="#96EDDF", command=self.name_collection)
         self.continue_button.grid(row=3,  padx=20, pady=20)        
          
-       
 
     def name_collection(self):
         name=self.entry_box.get()
@@ -48,12 +44,12 @@ class Quiz:
         self.continue_button.destroy()
         self.entry_box.destroy() #Destroy name frame then open the quiz runner
 
-    
-        
+
+
 
 if __name__ == "__main__":
     root = Tk()
-    root.title("Maths Quiz program") 
+    root.title("Maths Quiz Program") 
 
     quiz_instance = Quiz(root) #instantiation, making an instance of the class Quiz
     root.mainloop()#so the frame doesnt dissapear
