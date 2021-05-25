@@ -108,24 +108,24 @@ class Quiz:
         self.rb4 = Radiobutton(self.quiz_frame, text = questions_answers[qnum][4], font=("Comic Sans MS", "11"), bg="#62E4CF", value=4, variable=self.var1, indicator=0,  pady=10, padx=100)
         self.rb4.grid(row=5)
 
-        self.confirm_button= Button(self.quiz_frame, text="Confirm",bg="#A8F0E4", command=self.test_process)
+        self.confirm_button= Button(self.quiz_frame, text="Confirm", bg="#A8F0E4", command=self.test_process)
         self.confirm_button.grid(row=6, pady=10, padx=150)
         
-        
-        def question.setup(self):
+        self.score_label=label(self.quiz_frame, text=SCORE, font=("Comic Sans MS", "11"),bg="#A8F0E4",  )
+        self.score_label.grid(row=8, pady=1)
+
+        def questions_setup(self):
           randomiser()
           self.var1.set(0)
-          self.question_label.config(text=questions_answer[qnum][0])
-          self.rb1.config(text=questions_answer[qnum][1])
-          self.rb2.config(text=questions_answer[qnum][2])
-          self.rb3.config(text=questions_answer[qnum][3])
-          self.rb4.config(text=questions_answer[qnum][4])
+          self.question_label.config(text=questions_answers[qnum][0])
+          self.rb1.config(text=questions_answers[qnum][1])
+          self.rb2.config(text=questions_answers[qnum][2])
+          self.rb3.config(text=questions_answers[qnum][3])
+          self.rb4.config(text=questions_answers[qnum][4])
 
 
-
-
-          def test_process(self):
-            global score
+        def test_process(self):
+          global score
 
 
 
