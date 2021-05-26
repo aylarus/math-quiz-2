@@ -1,8 +1,50 @@
 from tkinter import *
 from PIL import ImageTk, Image
 import random 
-names = []
 global questions_answers 
+
+
+class quiz:
+  
+  def __init__(self, parent):  
+
+        self.bg_image = Image.open("math2.jpg")  
+        self.bg_image = self.bg_image.resize((450, 350), Image.ANTIALIAS)
+        self.bg_image = ImageTk.PhotoImage(self.bg_image)
+     
+
+        self.quiz_frame = Frame(parent, bg="white")
+ 
+        self.quiz_frame.grid()  
+        self.image_label = Label(self.quiz_frame, image=self.bg_image)
+        self.image_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+        self.heading_label = Label(self.quiz_frame,text="Welcome to the Maths Quiz Program ", font=("Comic Sans MS", "11"), bg="lightcyan")
+        self.heading_label.grid(row=1, padx=85, pady=35)
+
+
+        self.user_label = Label(self.quiz_frame, text="Enter your Name: ", font=("Comic Sans MS", "13"), bg="#A8F0E4")
+        self.user_label.grid(row=2, padx=90, pady=25)
+ 
+
+        self.entry_box = Entry(self.quiz_frame)
+        self.entry_box.grid(row=3, padx=90, pady=25)
+
+
+        self.continue_button = Button(self.quiz_frame,text="Continue",font=("Comic Sans MS", "13", "bold"), command=self.name_collection)
+        self.continue_button.grid(row=4, padx=90, pady=35)
+
+  def name_collection(self):
+        name = self.entry_box.get()
+        names.append(name) 
+        self.continue_button.destroy()
+        self.entry_box.destroy() 
+        self.heading_label.destroy()
+        self.user_label.destroy()
+        Quiz(root)
+        
+
+names = []
 asked=[]
 score=0
 
@@ -45,47 +87,8 @@ def randomiser():
 
 
 
-
 class Quiz:
-    def __init__(self, parent):  
-
-        self.bg_image = Image.open("math2.jpg")  
-        self.bg_image = self.bg_image.resize((450, 350), Image.ANTIALIAS)
-        self.bg_image = ImageTk.PhotoImage(self.bg_image)
-     
-
-        self.quiz_frame = Frame(parent, bg="white")
- 
-        self.quiz_frame.grid()  
-        self.image_label = Label(self.quiz_frame, image=self.bg_image)
-        self.image_label.place(x=0, y=0, relwidth=1, relheight=1)
-
-        self.heading_label = Label(self.quiz_frame,text="Welcome to the Maths Quiz Program ", font=("Comic Sans MS", "11"), bg="lightcyan")
-        self.heading_label.grid(row=1, padx=85, pady=35)
-
-
-        self.user_label = Label(self.quiz_frame, text="Enter your Name: ", font=("Comic Sans MS", "13"), bg="#A8F0E4")
-        self.user_label.grid(row=2, padx=90, pady=25)
- 
-
-        self.entry_box = Entry(self.quiz_frame)
-        self.entry_box.grid(row=3, padx=90, pady=25)
-
-
-        self.continue_button = Button(self.quiz_frame,text="Continue",font=("Comic Sans MS", "13", "bold"), command=self.name_collection)
-        self.continue_button.grid(row=4, padx=90, pady=35)
-
-    def name_collection(self):
-        name = self.entry_box.get()
-        names.append(name) 
-        self.continue_button.destroy()
-        self.entry_box.destroy() 
-        self.heading_label.destroy()
-        self.user_label.destroy()
-        Quiz(root)
-
-class Quiz:
-    def __init__(self, parent):  
+  def __init__(self, parent):  
    
         self.quiz_frame = Frame(parent, bg="white")
         self.quiz_frame.grid(pady=0, padx=0)  
@@ -105,16 +108,16 @@ class Quiz:
         self.rb3 = Radiobutton(self.quiz_frame, text = questions_answers[qnum][3], font=("Comic Sans MS", "11"), bg="#62E4CF", value=3, variable=self.var1, indicator=0,  pady=10, padx=100)
         self.rb3.grid(row=4)
                 
-        self.rb4 = Radiobutton(self.quiz_frame, text = questions_answers[qnum][4], font=("Comic Sans MS", "11"), bg="#62E4CF", value=4, variable=self.var1, indicator=0,  pady=10, padx=100)
+        self.rb4 = Radiobutton(self.quiz_frame, text = questions_answers[qnum][4], font=("Comic Sans MS", "11"), bg="#62E4CF", value=4, indicator=0,  pady=10, padx=100,variable=self.var1)
         self.rb4.grid(row=5)
 
-        self.confirm_button= Button(self.quiz_frame, text="Confirm", bg="#A8F0E4", command=self.test_process)
-        self.confirm_button.grid(row=6, pady=10, padx=150)
+        self.confirm_button= Button(self.quiz_frame, text="Confirm", bg="#A8F0E4", command=self.test_progress)
+        self.confirm_button.grid(row=6, pady=5, padx=5)
         
-        self.score_label=label(self.quiz_frame, text=SCORE, font=("Comic Sans MS", "11"),bg="#A8F0E4",  )
+        self.score_label= Label(self.quiz_frame, text="SCORE", font=("Comic Sans MS", "11"),bg="#A8F0E4")
         self.score_label.grid(row=8, pady=1)
 
-        def questions_setup(self):
+  def questions_setup(self):
           randomiser()
           self.var1.set(0)
           self.question_label.config(text=questions_answers[qnum][0])
@@ -124,8 +127,57 @@ class Quiz:
           self.rb4.config(text=questions_answers[qnum][4])
 
 
-        def test_process(self):
-          global score
+  def test_progress(self):
+    global score
+    scr_label=self.score_label
+    choice=self.var1.get()
+    if len(asked)>5:
+      if choice == questions_answers[qnum][4]:
+        score+=1
+        scr_label.configure(text=score)
+        self.quiz_instance.config(text=confirm)
+        self.endscreen()
+      
+      else:
+        print(choice)
+        score+=0
+        scr_label.configure(text="The correct answer is" + questions_answers[qnum][5])
+        self.quiz_instance.config(text="Confirm")
+        self.endscreen()
+
+    else:
+      if choice==0:
+        self.quiz_instance.config(text="Please try again")
+        choice=self.var1.get()
+        
+      else:
+        if choice == questions_answers[qnum][6]:
+          score+=1
+          scr_label.configure(text=score)
+          self.quiz-instance.config(test="Confirm")
+          self.questions_setup()
+
+        else:
+          print(choice)
+          score+=0
+          scr_label.configure(text="the correct answer is" + questions_answers[qnum][5])
+          seld.quiz_instance.config(text="Confirm")
+          self.questions_setup()
+
+  def endScreen(self):
+    root.withdraw()
+    open_endscrn=End()
+
+
+class End:
+    def __init__(self, parent): 
+      background="white"
+      self.end_box= Toplevel(root)
+      self.end_box
+      
+
+        self.quiz_frame = Frame(parent, bg="white")
+        self.quiz_frame.grid(pady=0, padx=0) 
 
 
 
@@ -133,8 +185,7 @@ class Quiz:
 
 
 if __name__ == "__main__":
-    root = Tk()
-    root.title("Maths Quiz Program")
-    quiz_instance = Quiz(root)
-    root.mainloop() 
- 
+  root = Tk()
+  root.title("Maths Quiz Program")
+  quiz_instance = Quiz(root)
+  root.mainloop()
