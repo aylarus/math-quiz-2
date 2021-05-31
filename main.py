@@ -111,10 +111,10 @@ class Quiz:
         self.rb4 = Radiobutton(self.quiz_frame, text = questions_answers[qnum][4], font=("Comic Sans MS", "11"), bg="#62E4CF", value=4, indicator=0,  pady=10, padx=100,variable=self.var1)
         self.rb4.grid(row=5)
 
-        self.confirm_button= Button(self.quiz_frame, text="Confirm", bg="#A8F0E4", command=self.test_progress)
+        self.confirm_button = Button(self.quiz_frame, text="Confirm", bg="#A8F0E4", command=self.test_progress)
         self.confirm_button.grid(row=6, pady=5, padx=5)
         
-        self.score_label= Label(self.quiz_frame, text="SCORE", font=("Comic Sans MS", "11"),bg="#A8F0E4")
+        self.score_label = Label(self.quiz_frame, text="SCORE", font=("Comic Sans MS", "11"),bg="#A8F0E4")
         self.score_label.grid(row=8, pady=1)
 
   def questions_setup(self):
@@ -166,19 +166,58 @@ class Quiz:
 
   def endScreen(self):
     root.withdraw()
+    name=names[0]
+    file=open("leaderBoard.txt", "a")
+    file.write(str(score))
+    file.write(" - ")
+    file.write(name+"\n")
+    file.close()
+
+    inputFile = open("leaderBoard.txt", 'r')
+    lineList = inputFile.readlines()
+    lineList.sort()
+    top=[]
+    top5=(lineList[-5:])
+    for line in top5:
+      point=line.split(" - ")
+      top.append((int(point[0]), point[1]))
+    file.close()
+    top.sort()
+    top.reverse()
+    return_string =""
+    for i in range (len(top)):
+      return_string +="{} - {}\n".format(top[i][0], top[i][1])
+      print (return_string)
+
     open_endscrn=End()
+    open_endscrn.listLabel.config(text=return_string)
+
 
 
 class End:
     def __init__(self, parent): 
-      background="white"
+      background ="white"
       self.end_box= Toplevel(root)
-      self.end_box
-      
+      self.end_box.title("End Box")
 
-        self.quiz_frame = Frame(parent, bg="white")
-        self.quiz_frame.grid(pady=0, padx=0) 
+      self.end_frame = Frame(self.end_box, width=1000, height=1000, bg=background)
+      self.end_frame.grid_info
 
+      end_heading = Label (self.end_frame, text='Well Done', font=("Comic Sans MS", "11"), bg=background, pady=15)
+      end_heading.grid(row=0)
+
+      exit_button = Button (self.end_frame, text='Exit', width=10, bg="lightblue", font=("Comic Sans MS", "11"), command=self.close_end)
+      exit_button.grid(row=4, pady=20)
+
+      self.quit = Button(self.quiz_frame, text="quit", font=("Comic Sans MS", "11"), bg="lightblue", command=self.endscreen)
+      self.quit.grid = (row=7, column=3, padx=5, pady=5)
+
+      self.listLabel = label(self.end_frame, text("1st place available", font=("Comic Sans MS", "11"), width=40, bg=background, padx=10, pady=10)
+      self.listLabel.grid(column, row=2)
+
+    def close_end(self):
+      self.end_box.destroy()
+      root.withdraw()
 
 
 
