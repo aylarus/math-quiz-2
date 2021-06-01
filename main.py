@@ -155,7 +155,7 @@ class Quiz:
         if choice == questions_answers[qnum][4]:
           score+=1
           scr_label.configure(text=score)
-          self.quiz-instance.config(test="Confirm")
+          self.quiz_instance.config(test="Confirm")
           self.questions_setup()
 
         else:
