@@ -127,6 +127,7 @@ class Quiz:
           self.rb4.config(text=questions_answers[qnum][4])
 
 
+
   def test_progress(self):
     global score
     scr_label=self.score_label
@@ -141,7 +142,7 @@ class Quiz:
       else:
         print(choice)
         score+=0
-        scr_label.configure(text="The correct answer is" + questions_answers[qnum][5])
+        scr_label.configure(text="The correct answer is " + questions_answers[qnum][5])
         self.quiz_instance.config(text="Confirm")
         self.endscreen()
 
@@ -151,7 +152,7 @@ class Quiz:
         choice=self.var1.get()
         
       else:
-        if choice == questions_answers[qnum][6]:
+        if choice == questions_answers[qnum][4]:
           score+=1
           scr_label.configure(text=score)
           self.quiz-instance.config(test="Confirm")
@@ -160,8 +161,8 @@ class Quiz:
         else:
           print(choice)
           score+=0
-          scr_label.configure(text="the correct answer is" + questions_answers[qnum][5])
-          seld.quiz_instance.config(text="Confirm")
+          scr_label.configure(text="the correct answer is" + questions_answers[qnum][1])
+          self.quiz_instance.config(text="Confirm")
           self.questions_setup()
 
   def endScreen(self):
@@ -210,10 +211,10 @@ class End:
       exit_button.grid(row=4, pady=20)
 
       self.quit = Button(self.quiz_frame, text="quit", font=("Comic Sans MS", "11"), bg="lightblue", command=self.endscreen)
-      self.quit.grid = (row=7, column=3, padx=5, pady=5)
+      self.quit.grid(row=7, column=3, padx=5, pady=5)
 
-      self.listLabel = label(self.end_frame, text("1st place available", font=("Comic Sans MS", "11"), width=40, bg=background, padx=10, pady=10)
-      self.listLabel.grid(column, row=2)
+      self.listLabel = Label(self.end_frame, text="1st place available", font=("Comic Sans MS", "11"), width=40, bg=background, padx=10, pady=10)
+      self.listLabel.grid(row=2)
 
     def close_end(self):
       self.end_box.destroy()
