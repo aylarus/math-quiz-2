@@ -1,7 +1,7 @@
 from tkinter import *
 from PIL import ImageTk, Image
 import random 
-global questions_answers 
+
 
 
 class Start:
@@ -70,7 +70,7 @@ class Starter:
         self.user_label = Label(self.quiz_frame, text="Enter a Username: ", font=("Comic Sans MS", "13"), bg="#A8F0E4")
         self.user_label.grid(row=2, padx=90, pady=25)#placing of the username label
                 #continue button to continue on to the next component where the questions are asked 
-        self.continue_button = Button(self.quiz_frame,text="Continue",font=("Comic Sans MS", "13", "bold"),bg="#62E4CF",  command=self.conbutton)
+        self.continue_button = Button(self.quiz_frame,text="Continue",font=("Comic Sans MS", "13", "bold"),bg="#62E4CF",  command=self.name_collection)
         self.continue_button.grid(row=4, padx=0, pady=35)#plaing of the continue button
  
         #entry box to enter the username 
@@ -79,23 +79,18 @@ class Starter:
 
 
   #trial and error for the continue button so it the user left the box empty then 
-
-           
-    
-  
-
-    def name_collection(self):
+  def name_collection(self):
      name = self.entry_box.get()
-     if name.strip() != "" and len(name) <= 15:
+     if len(name) >=2 and len(name) <= 15:
        names.append(name)
        self.quiz_frame.destroy()#destroying the second component
        Quiz(root)#after destroying second compnent moving on to the next componet (the quiz questions)
      elif len (name) == 0 :
         self.continue_button.config(text="Please enter a Username", font=("Comic Sans MS", "10"))
         
-     elif len(name) < 2 :#the user can only have 10 values this will stop the user from contuining
+     elif len(name) <= 2 :#the user can only have 10 values this will stop the user from contuining
         self.continue_button.config(text="username has to be \n more than 1 value", font=("Comic Sans MS", "10"))
-     elif len (name) > 15 :
+     elif len (name) >= 15 :
        self.continue_button.config(text="username cant have\n more that 15 values", font=("Comic Sans MS", "10"))
 
 
