@@ -67,10 +67,10 @@ class Starter:
         self.heading_label.grid(row=1, padx=85, pady=35)#placing of the text/label
 
         #username label
-        self.user_label = Label(self.quiz_frame, text="Enter a UserName: ", font=("Comic Sans MS", "13"), bg="#A8F0E4")
+        self.user_label = Label(self.quiz_frame, text="Enter a Username: ", font=("Comic Sans MS", "13"), bg="#A8F0E4")
         self.user_label.grid(row=2, padx=90, pady=25)#placing of the username label
                 #continue button to continue on to the next component where the questions are asked 
-        self.continue_button = Button(self.quiz_frame,text="Continue",font=("Comic Sans MS", "13", "bold"),bg="#62E4CF",  command=self.contbutton)
+        self.continue_button = Button(self.quiz_frame,text="Continue",font=("Comic Sans MS", "13", "bold"),bg="#62E4CF",  command=self.conbutton)
         self.continue_button.grid(row=4, padx=0, pady=35)#plaing of the continue button
  
         #entry box to enter the username 
@@ -79,22 +79,25 @@ class Starter:
 
 
   #trial and error for the continue button so it the user left the box empty then 
-  def name_collection(self):
-     name= self.entry_box.get()
-     if name.strip() != "" and len(name) <= 15:
-       name.append(name)
-       self.quiz_frame.destroy()#destroying the second component
-       Quiz(root)#after destroying second compnent moving on to the next componet (the quiz questions)
-     elif len (name) ==  0:
-        self.continue_button.config(text="Please enter a Username", font=("Comic Sans MS", "10"))
-        
-      elif len(name) <= 2:#the user can only have 10 values this will stop the user from contuining
-        self.continue_button.config(text="username has to be \n more than 2 values", font=("Comic Sans MS", "10"))
-            
-       else:
-         self.name_collection()#coninuation from the continue button to the next compnent(the questions)
+
+           
     
   
+
+    def name_collection(self):
+     name = self.entry_box.get()
+     if name.strip() != "" and len(name) <= 15:
+       names.append(name)
+       self.quiz_frame.destroy()#destroying the second component
+       Quiz(root)#after destroying second compnent moving on to the next componet (the quiz questions)
+     elif len (name) == 0 :
+        self.continue_button.config(text="Please enter a Username", font=("Comic Sans MS", "10"))
+        
+     elif len(name) < 2 :#the user can only have 10 values this will stop the user from contuining
+        self.continue_button.config(text="username has to be \n more than 1 value", font=("Comic Sans MS", "10"))
+     elif len (name) > 15 :
+       self.continue_button.config(text="username cant have\n more that 15 values", font=("Comic Sans MS", "10"))
+
 
 
 
@@ -291,9 +294,9 @@ class Quiz:
     file.close()#closes the files 
     top.sort()
     top.reverse()
-    return_string = " Your final score is: "
+    return_string = " LeaderBoard scores, 1st place: "
     for i in range (len(top)):
-      return_string += "{} - {}\n".format(top[i][0], top[i][1])
+      return_string += "{}/10- {}\n".format(top[i][0], top[i][1])
       print(return_string)#for testing to show on the console
       
     open_endscreen = End(root)
@@ -315,7 +318,7 @@ class End:
       exit_button.grid(row=4, pady=20, padx=5, sticky=E)
 
       #if 1st place is available/ what they got 
-      self.listLabel = Label(self.end_frame, text="You are in 1st place", font=("Comic Sans MS", "11"), width=40, bg=background, padx=10, pady=10)
+      self.listLabel = Label(self.end_frame, text="Well done!(＾▽＾)You are in 1st place", font=("Comic Sans MS", "11"), width=40, bg=background, padx=10, pady=10)
       self.listLabel.grid(row=2)
 
 

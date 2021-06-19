@@ -10,3 +10,4 @@
 3 - 1212121
 6 - sdfgh
 3 - dfgbh
+3 - nnn   mm mm
