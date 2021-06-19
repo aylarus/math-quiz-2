@@ -79,30 +79,24 @@ class Starter:
 
 
   #trial and error for the continue button so it the user left the box empty then 
-  def contbutton(self):
-    if len(self.entry_box.get()) ==  0:
-      self.continue_button.config(text="Please enter a Username", font=("Comic Sans MS", "10"))
-
-    else:#the user can only have 10 values this will stop the user from contuining 
-      if len(self.entry_box.get()) > 15:
-        self.continue_button.config(text="username has to be \nunder 15 values", font=("Comic Sans MS", "10"))
-
-      else:#the user can only have 10 values this will stop the user from contuining
-       if len(self.entry_box.get()) <= 2:
-         self.continue_button.config(text="username has to be \n more than 2 values", font=("Comic Sans MS", "10"))
+  def name_collection(self):
+     name= self.entry_box.get()
+     if name.strip() != "" and len(name) <= 15:
+       name.append(name)
+       self.quiz_frame.destroy()#destroying the second component
+       Quiz(root)#after destroying second compnent moving on to the next componet (the quiz questions)
+     elif len (name) ==  0:
+        self.continue_button.config(text="Please enter a Username", font=("Comic Sans MS", "10"))
+        
+      elif len(name) <= 2:#the user can only have 10 values this will stop the user from contuining
+        self.continue_button.config(text="username has to be \n more than 2 values", font=("Comic Sans MS", "10"))
             
        else:
          self.name_collection()#coninuation from the continue button to the next compnent(the questions)
     
-     
   
 
-  def name_collection(self):
-        name = self.entry_box.get()
-        names.append(name) 
-        self.quiz_frame.destroy()#destroying the second component 
-        Quiz(root)#after destroying second compnent moving on to the next componet (the quiz questions)
-        
+
 
 names = []
 asked = []
