@@ -88,8 +88,8 @@ class Starter:
      elif len (name) == 0 :
         self.continue_button.config(text="Please enter a Username", font=("Comic Sans MS", "10"))
         
-     elif len(name) <= 2 :#the user can only have 10 values this will stop the user from contuining
-        self.continue_button.config(text="username has to be \n more than 1 value", font=("Comic Sans MS", "10"))
+     elif len(name) <= 3 :#the user can only have 10 values this will stop the user from contuining
+        self.continue_button.config(text="username has to be \n more than 2 value", font=("Comic Sans MS", "10"))
      elif len (name) >= 15 :
        self.continue_button.config(text="username cant have\n more that 15 values", font=("Comic Sans MS", "10"))
 
