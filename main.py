@@ -81,7 +81,7 @@ class Starter:
   #trial and error for the continue button so it the user left the box empty then 
   def name_collection(self):
      name = self.entry_box.get()
-     if len(name) >=2 and len(name) <= 15:
+     if len(name) >=3 and len(name) <= 15:
        names.append(name)
        self.quiz_frame.destroy()#destroying the second component
        Quiz(root)#after destroying second compnent moving on to the next componet (the quiz questions)
