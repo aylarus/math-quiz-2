@@ -12,3 +12,5 @@
 3 - dfgbh
 3 - nnn   mm mm
 4 - de
+7 - ccc
+3 - tttt
