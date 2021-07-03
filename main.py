@@ -71,7 +71,7 @@ class Starter:  # second window
     def __init__(self, parent):  # this function is called every time the class is being used to create a new object
 
         self.bg_image = Image.open('math2.jpg')  # same image for the 2nd component
-        self.bg_image = self.bg_image.resize((450, 350),
+        self.bg_image = self.bg_image.resize((550, 450),
                 Image.ANTIALIAS)  # sizing of the background image
         self.bg_image = ImageTk.PhotoImage(self.bg_image)
 
@@ -126,19 +126,19 @@ class Starter:  # second window
             self.quiz_frame.destroy()  # destroying the second component
             Quiz(root)  # after destroying second compnent moving on to the next componet (the quiz questions)
         elif len(name) == 0:
-            self.continue_button.config(text='Please enter a Username',
+            self.continue_button.config(text='Please enter a Username\n then press this button',
                     font=('Comic Sans MS', '10'))
         elif len(name) <= 3:
 
                           # the user can only have 10 values this will stop the user from contuining
 
-            self.continue_button.config(text='username has to be \n more than 2 value'
+            self.continue_button.config(text='username has to be \n more than 2 values\n then press this button'
                     , font=('Comic Sans MS', '10'))
         elif len(name) >= 15:
-            self.continue_button.config(text='username cant have\n more that 15 values'
+            self.continue_button.config(text='username cant have\n more that 15 values \n then press this button'
                     , font=('Comic Sans MS', '10'))
         elif name.isalpha() == False:
-            self.continue_button.config(text='username must be made of alphabets'
+            self.continue_button.config(text='username must be made\n of alphabets\n then press this button'
                     , font=('Comic Sans MS', '10'))
 
 
@@ -382,7 +382,7 @@ class Quiz:  # third window
         else:
 
             if choice == 0:  # if the user doesnt select and option
-                self.confirm_button.config(text='Pick an option')  # then the confirm button will say plase try again until the questions is answered and an option is selected
+                self.confirm_button.config(text='Pick an option \n then press this button')  # then the confirm button will say plase try again until the questions is answered and an option is selected
                 choice = self.var1.get()  # still get the answer if they chose it
             else:
 
@@ -417,24 +417,26 @@ class Quiz:  # third window
             file.write(name + '\n')  # writes the names into the text files and goes to a new line (\n)
             file.close()  # closes the file
 
-        inputFile = open('leaderBoard.txt', 'r')  # opens the highscore files in read mode
-        lineList = inputFile.readlines()  # linelist equals the each lines in the lists
-        lineList.sort()  # sorts the line alpabetically
-        top = []  # display top scores
-        top5 = lineList[-5:]  # the last 10 values in the list for top 10
-        for line in top5:
-            point = line.split(' - ')
-            top.append((int(point[0]), point[1]))
-        file.close()  # closes the files
-        top.sort()
-        top.reverse()
-        return_string = ' LeaderBoard scores, 1st place: '
-        for i in range(len(top)):
-            return_string += '{}/10- {}\n'.format(top[i][0], top[i][1])
+            inputFile = open('leaderBoard.txt', 'r')  # opens the highscore files in read mode
+            lineList = inputFile.readlines()  # linelist equals the each lines in the lists
+            lineList.sort()  # sorts the line alpabetically
+            top = []  # display top scores
+            top5 = lineList[-5:]  # the last 5 values in the list for top 5
+            print(top5)
+            for line in top5:
+                point = line.split(' - ')
+                top.append((int(point[0]), point[1]))
+            file.close()  # closes the files
+            top.sort()
+            top.reverse()
+            print(top)
+            return_string = ' LeaderBoard scores, 1st place: '
+            for i in range(len(top)):
+                return_string += '{}/10- {}\n'.format(top[i][0], top[i][1])
             print(return_string)  # for testing to show on the console
 
-        open_endscreen = End(root)
-        open_endscreen.listLabel.config(text=return_string)  # this will config the label in the end screen class which is displaying the names of the top 5
+            open_endscreen = End(root)
+            open_endscreen.listLabel.config(text=return_string)  # this will config the label in the end screen class which is displaying the names of the top 5
 
 
 class End:  # final windpw
@@ -479,8 +481,7 @@ class End:  # final windpw
             width=40,
             bg=background,
             padx=10,
-            pady=10,
-            )
+            pady=10)
         self.listLabel.grid(row=2)
 
     def close_end(self):
