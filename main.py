@@ -370,7 +370,7 @@ class Quiz:  # third window
                 score += 1  # adding a point after each correct answer
                 scr_label.configure(text=score)  # it will change the score to the new score each time
                 self.confirm_button.config(text='confirm')  # will change the test on the button to confirm
-                self.endScreen()  # to open endScreen when quiz is completed
+                self.end_screen()  # to open endscreen when quiz is completed
             else:
 
                 print(choice)
@@ -378,7 +378,7 @@ class Quiz:  # third window
                 scr_label.configure(text='Incorrect the answer was:  '
                                     + self.questions_answers[qnum][5])  # sayin the incorrect answer the the question that the end user put wrong
                 self.confirm_button.config(text='Confirm')  # will change the test on the button to confirm
-                self.endScreen()  # to open endScreen when quiz is completed
+                self.end_screen()  # to open endscreen when quiz is completed
         else:
 
             if choice == 0:  # if the user doesnt select and option
@@ -404,7 +404,7 @@ class Quiz:  # third window
                     self.confirm_button.config(text='Confirm')
                     self.questions_setup()  # moving to the next question
 
-    def endScreen(self):
+    def end_screen(self):
         root.withdraw()
         name = names[0]
         file = open('leaderBoard.txt', 'a')  # opens highscores, text file in append mode
@@ -435,8 +435,8 @@ class Quiz:  # third window
                 return_string += '{}/10- {}\n'.format(top[i][0], top[i][1])
             print(return_string)  # for testing to show on the console
 
-            open_endscreen = End(root)
-            open_endscreen.listLabel.config(text=return_string)  # this will config the label in the end screen class which is displaying the names of the top 5
+            open_end_screen = End(root)
+            open_end_screen.listLabel.config(text=return_string)  # this will config the label in the end screen class which is displaying the names of the top 5
 
 
 class End:  # final windpw
