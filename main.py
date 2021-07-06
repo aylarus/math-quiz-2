@@ -435,8 +435,8 @@ class Quiz:  # third window
                 return_string += '{}/10- {}\n'.format(top[i][0], top[i][1])
             print(return_string)  # for testing to show on the console
 
-            open_end_screen = End(root)
-            open_end_screen.listLabel.config(text=return_string)  # this will config the label in the end screen class which is displaying the names of the top 5
+        open_end_screen = End(root)
+        open_end_screen.listLabel.config(text=return_string)  # this will config the label in the end screen class which is displaying the names of the top 5
 
 
 class End:  # final windpw
